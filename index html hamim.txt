@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Story Generator - Create Your Romantic Story</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts-bg"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Page 1: Welcome & Input Page -->
+        <div id="page1" class="page active">
+            <div class="page-content">
+                <h1 class="title animate-title">💕 Love Story Generator 💕</h1>
+                <p class="subtitle">Create Your Perfect Romantic Moment</p>
+
+                <form id="inputForm" class="form-container">
+                    <!-- Your Name -->
+                    <div class="form-group">
+                        <label for="yourName">Your Name</label>
+                        <input type="text" id="yourName" placeholder="Enter your name" required>
+                    </div>
+
+                    <!-- Partner Name -->
+                    <div class="form-group">
+                        <label for="partnerName">Partner's Name (GF/BF)</label>
+                        <input type="text" id="partnerName" placeholder="Enter your love's name" required>
+                    </div>
+
+                    <!-- Photo Upload -->
+                    <div class="form-group">
+                        <label for="photoUpload">📸 Upload Your Photos</label>
+                        <input type="file" id="photoUpload" accept="image/*" multiple required>
+                        <div id="photoPreview" class="preview-container"></div>
+                    </div>
+
+                    <!-- Audio Upload -->
+                    <div class="form-group">
+                        <label for="audioUpload">🎵 Upload Your Favorite Song</label>
+                        <input type="file" id="audioUpload" accept="audio/*" required>
+                        <div id="audioPreview" class="audio-preview"></div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <button type="submit" class="btn btn-primary">
+                        <span>Generate Love Story</span>
+                        <span class="heart-icon">❤️</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Page 2: Style Selection -->
+        <div id="page2" class="page">
+            <div class="page-content">
+                <h2 class="page-title">Choose Your Story Style</h2>
+                
+                <div class="style-selector">
+                    <div class="style-card" id="birthdayCard">
+                        <div class="style-icon">🎂</div>
+                        <h3>Birthday Style</h3>
+                        <p>Celebrate with animated birthday scene and floating hearts</p>
+                        <button class="btn btn-secondary" onclick="selectStyle('birthday')">Select</button>
+                    </div>
+
+                    <div class="style-card" id="romanticCard">
+                        <div class="style-icon">❤️</div>
+                        <h3>Romantic Style</h3>
+                        <p>Beautiful photo slideshow with romantic background</p>
+                        <button class="btn btn-secondary" onclick="selectStyle('romantic')">Select</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-back" onclick="goBack()">← Back</button>
+            </div>
+        </div>
+
+        <!-- Page 3: Loading Page -->
+        <div id="page3" class="page">
+            <div class="loading-container">
+                <div class="loader"></div>
+                <h2>Creating Your Love Story...</h2>
+                <p>✨ Just a moment of magic... ✨</p>
+            </div>
+        </div>
+
+        <!-- Page 4: Birthday Style Result -->
+        <div id="page4" class="page">
+            <div class="birthday-container">
+                <!-- Balloons -->
+                <div class="balloon" style="left: 10%;"></div>
+                <div class="balloon" style="left: 20%;"></div>
+                <div class="balloon" style="left: 30%;"></div>
+                <div class="balloon" style="left: 40%;"></div>
+                <div class="balloon" style="left: 60%;"></div>
+                <div class="balloon" style="left: 70%;"></div>
+                <div class="balloon" style="left: 80%;"></div>
+                <div class="balloon" style="left: 90%;"></div>
+
+                <!-- Confetti -->
+                <div class="confetti-container" id="confettiContainer"></div>
+
+                <!-- Birthday Caption -->
+                <div class="birthday-content">
+                    <h1 class="birthday-title" id="birthdayCaption">Happy Birthday My Love ❤️</h1>
+                    
+                    <!-- Characters -->
+                    <div class="characters">
+                        <div class="character boy">
+                            <div class="head"></div>
+                            <div class="body"></div>
+                            <div class="arms">
+                                <div class="arm left"></div>
+                                <div class="arm right"></div>
+                            </div>
+                            <div class="legs">
+                                <div class="leg left"></div>
+                                <div class="leg right"></div>
+                            </div>
+                        </div>
+
+                        <div class="heart-center animated-heart">💕</div>
+
+                        <div class="character girl">
+                            <div class="head"></div>
+                            <div class="body"></div>
+                            <div class="arms">
+                                <div class="arm left"></div>
+                                <div class="arm right"></div>
+                            </div>
+                            <div class="legs">
+                                <div class="leg left"></div>
+                                <div class="leg right"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Hearts -->
+                    <div class="floating-hearts-container" id="floatingHeartsContainer"></div>
+                </div>
+
+                <!-- Audio Player -->
+                <div class="audio-player-container">
+                    <audio id="audioPlayer" controls>
+                        <source src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="shareBtn">📤 Generate Shareable Link</button>
+                    <button class="btn btn-secondary" id="qrBtn">📱 Generate QR Code</button>
+                    <button class="btn btn-back" onclick="goBack()">← Create New Story</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 5: Romantic Style Result -->
+        <div id="page5" class="page">
+            <div class="romantic-container">
+                <!-- Romantic Background -->
+                <div class="romantic-bg">
+                    <div class="heart-shape heart1"></div>
+                    <div class="heart-shape heart2"></div>
+                    <div class="heart-shape heart3"></div>
+                </div>
+
+                <!-- Slideshow -->
+                <div class="slideshow-container">
+                    <div class="slide fade" id="slide0">
+                        <img src="" alt="Love Photo" class="slide-img">
+                    </div>
+                    <div class="slide-controls">
+                        <button class="btn btn-nav" onclick="changeSlide(-1)">❮</button>
+                        <span id="slideCounter">1 / 1</span>
+                        <button class="btn btn-nav" onclick="changeSlide(1)">❯</button>
+                    </div>
+                </div>
+
+                <!-- Custom Caption -->
+                <div class="caption-section">
+                    <input type="text" id="customCaption" placeholder="Write your romantic caption here..." maxlength="200" class="caption-input">
+                    <button class="btn btn-secondary" onclick="applyCaption()">Apply Caption</button>
+                    <div class="caption-display" id="captionDisplay"></div>
+                </div>
+
+                <!-- Audio Player -->
+                <div class="audio-player-container">
+                    <audio id="audioPlayer2" controls>
+                        <source src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="shareBtn2">📤 Generate Shareable Link</button>
+                    <button class="btn btn-secondary" id="qrBtn2">📱 Generate QR Code</button>
+                    <button class="btn btn-back" onclick="goBack()">← Create New Story</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for QR Code -->
+        <div id="qrModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Your Love Story QR Code</h2>
+                <div id="qrCodeContainer"></div>
+                <p class="qr-info">Scan this QR code to share your love story!</p>
+                <button class="btn btn-primary" onclick="downloadQR()">Download QR Code</button>
+            </div>
+        </div>
+
+        <!-- Modal for Share Link -->
+        <div id="shareModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Your Shareable Link</h2>
+                <div class="share-link-container">
+                    <input type="text" id="shareLink" readonly class="share-input">
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">📋 Copy Link</button>
+                </div>
+                <p class="share-info">Share this link with your loved one!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
